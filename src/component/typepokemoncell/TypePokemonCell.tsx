@@ -1,19 +1,14 @@
 import React from 'react';
 import {TouchableHighlight} from 'react-native';
-import {
-  Container,
-  ContainerElement,
-  ImageCharacter,
-  TextName,
-} from './PokemonCell.style';
+import {Container, ContainerElement, TextName} from './TypePokemonCell.style';
 import PropTypes from 'prop-types';
 
-const PokemonCell = (props) => {
+const TypePokemonCell = (props) => {
   const _detailCharacter = () => {
-    props.onPress(props.id);
+    props.onPress(props.name);
   };
 
-  const {sourceImage, name} = props;
+  const {name} = props;
 
   return (
     <Container>
@@ -21,7 +16,6 @@ const PokemonCell = (props) => {
         underlayColor={'transparent'}
         onPress={_detailCharacter}>
         <ContainerElement>
-          <ImageCharacter source={{uri: sourceImage}} />
           <TextName>{name}</TextName>
         </ContainerElement>
       </TouchableHighlight>
@@ -29,26 +23,22 @@ const PokemonCell = (props) => {
   );
 };
 
-export default PokemonCell;
+export default TypePokemonCell;
 
 /**
- * @name PokemonCell propTypes
+ * @name TypePokemonCell propTypes
  * @type {propTypes}
- * @memberof PokemonCell
+ * @memberof TypePokemonCell
  * @static
  * @example
- * <PokemonCell onPress={onPress} name= {name} sourceImage={sourceImage} id={id} />
+ * <TypePokemonCell onPress={onPress} name= {name}  />
  */
-PokemonCell.propTypes = {
+TypePokemonCell.propTypes = {
   onPress: PropTypes.func,
   name: PropTypes.string,
-  sourceImage: PropTypes.string,
-  id: PropTypes.number,
 };
 
-PokemonCell.defaultProps = {
+TypePokemonCell.defaultProps = {
   onPress: undefined,
   name: '',
-  sourceImage: '',
-  id: 0,
 };

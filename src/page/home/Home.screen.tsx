@@ -1,15 +1,36 @@
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, View, FlatList, StatusBar} from 'react-native';
-import {styles} from './Home.style';
-
+import React, {useEffect, useState, useLayoutEffect} from 'react';
+import {StatusBar} from 'react-native';
+import {
+  Container,
+  List,
+  SafeArea,
+  FilterTouchable,
+  FilterImage,
+} from './Home.style';
 import {GetListPokemon} from '../../service/PokemonService';
-import PokemonCell from '../../component/pokemoncell/PokemonCell';
-import {PokemonList} from '../../model/PokemonList';
 import {Pokemon} from '../../model/Pokemon';
+import IMAGE from '../../assets/image/filter-results-button.png';
+import PokemonCell from '../../component/pokemoncell/PokemonCell';
 
 const Home: React.FC<Props> = ({navigation}) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [listPokemon, setListPokemon] = useState<Array<Pokemon>>([]);
+  var listTypePokemon: String[] = [];
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'Home',
+      headerRight: renderButton,
+    });
+  }, [navigation]);
+
+  const renderButton = () => {
+    return (
+      <FilterTouchable activeOpacity={0.5} onPress={detailTypeList}>
+        <FilterImage source={IMAGE} />
+      </FilterTouchable>
+    );
+  };
 
   useEffect(() => {
     getListPokemon();
@@ -20,32 +41,34 @@ const Home: React.FC<Props> = ({navigation}) => {
    */
   const getListPokemon = () => {
     setLoading(true);
-    GetListPokemon()
-      .then((response) => response.data)
-      .then((response: PokemonList) => {
-        setListPokemon(response.pokemon);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.warn(error);
-        setLoading(false);
-      });
+    GetListPokemon(onSucess, onError);
   };
 
-  const showDetails = (_id: number) => {
-    //   navigation.navigate('DetailCharacter', {id: _id});
+  const onError = (error) => {
+    setLoading(false);
   };
 
-  const _keyExtractor = (item: number, index: number) => `${index}`;
+  const onSucess = (pokemonParam: Pokemon[], typeListPokemon: String[]) => {
+    setListPokemon(pokemonParam);
+    listTypePokemon = typeListPokemon;
+    setLoading(false);
+  };
+
+  const detailTypeList = () => {
+    navigation.navigate('Filter', {typePokemon: listTypePokemon});
+  };
+
+  const showDetails = (typeName: String) => {
+    // navigation.navigate('ListPokemon', {typeName: typeName});
+  };
 
   const _renderItem = ({item}) => {
-    console.warn('item', item);
     return (
       <PokemonCell
         id={item.id}
         name={item.name}
         sourceImage={item.img}
-        onPress={showDetails}
+        // onPress={showDetails}
       />
     );
   };
@@ -53,17 +76,15 @@ const Home: React.FC<Props> = ({navigation}) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{backgroundColor: '#000000'}}>
-        <View>
-          <FlatList
-            style={styles.list}
+      <SafeArea>
+        <Container>
+          <List
             onEndReachedThreshold={0.1}
             data={listPokemon}
-            keyExtractor={_keyExtractor}
             renderItem={_renderItem}
           />
-        </View>
-      </SafeAreaView>
+        </Container>
+      </SafeArea>
     </>
   );
 };

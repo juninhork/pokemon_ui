@@ -13,6 +13,8 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../page/home/Home.screen';
+import ListPokemon from '../page/listpokemon/ListPokemon.screen';
+import Filter from '../page/filter/Filter.screen';
 
 const Stack = createStackNavigator();
 
@@ -21,9 +23,38 @@ const Routes = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          options={{headerShown: false}}
+          options={{
+            headerTintColor: '#ffffff',
+            headerStyle: {
+              backgroundColor: '#000000',
+            },
+          }}
           name="Home"
           component={Home}
+        />
+
+        <Stack.Screen
+          options={{
+            title: 'Lista',
+            headerTintColor: '#ffffff',
+            headerStyle: {
+              backgroundColor: '#000000',
+            },
+          }}
+          name="ListPokemon"
+          component={ListPokemon}
+        />
+
+        <Stack.Screen
+          options={{
+            title: 'Filter',
+            headerTintColor: '#ffffff',
+            headerStyle: {
+              backgroundColor: '#000000',
+            },
+          }}
+          name="Filter"
+          component={Filter}
         />
       </Stack.Navigator>
     </NavigationContainer>

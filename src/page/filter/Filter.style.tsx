@@ -14,17 +14,3 @@ export const List = styled.FlatList`
 export const SafeArea = styled.SafeAreaView`
   background-color: #000000;
 `;
-
-export const FilterTouchable = styled.TouchableOpacity`
-  width: 25px;
-  height: 60%;
-  margin-right: 20px;
-  margin-bottom: 5px;
-  tint-color: #ffffff;
-`;
-
-export const FilterImage = styled.Image`
-  width: 100%;
-  height: 100%;
-  tint-color: #ffffff;
-`;

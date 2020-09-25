@@ -15,13 +15,6 @@ export const ContainerElement = styled.View`
   width: 100%;
 `;
 
-export const ImageCharacter = styled.Image`
-  margin-left: 15px;
-  height: 70px;
-  width: 70px;
-  resize-mode: contain;
-`;
-
 export const TextName = styled.Text`
   margin-left: 20px;
   text-align: center;
