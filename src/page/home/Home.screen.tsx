@@ -9,10 +9,10 @@ import {
 } from './Home.style';
 import {GetListPokemon} from '../../service/PokemonService';
 import {Pokemon} from '../../model/Pokemon';
-import IMAGE from '../../assets/image/filter-results-button.png';
 import PokemonCell from '../../component/pokemoncell/PokemonCell';
+import IMAGE from '../../assets/image/filter-results-button.png';
 
-const Home: React.FC<Props> = ({navigation}) => {
+function Home({navigation}) {
   const [loading, setLoading] = useState<boolean>(true);
   const [listPokemon, setListPokemon] = useState<Array<Pokemon>>([]);
   var listTypePokemon: String[] = [];
@@ -44,7 +44,7 @@ const Home: React.FC<Props> = ({navigation}) => {
     GetListPokemon(onSucess, onError);
   };
 
-  const onError = (error) => {
+  const onError = (_error: any) => {
     setLoading(false);
   };
 
@@ -58,17 +58,19 @@ const Home: React.FC<Props> = ({navigation}) => {
     navigation.navigate('Filter', {typePokemon: listTypePokemon});
   };
 
-  const showDetails = (typeName: String) => {
-    // navigation.navigate('ListPokemon', {typeName: typeName});
+  const showDetails = (pokemonDetail: number) => {
+    navigation.navigate('PokemonDetail', {
+      pokemonDetail: listPokemon[pokemonDetail - 1],
+    });
   };
 
-  const _renderItem = ({item}) => {
+  const _renderItem = function ({item}) {
     return (
       <PokemonCell
         id={item.id}
         name={item.name}
         sourceImage={item.img}
-        // onPress={showDetails}
+        onPress={showDetails}
       />
     );
   };
@@ -87,6 +89,6 @@ const Home: React.FC<Props> = ({navigation}) => {
       </SafeArea>
     </>
   );
-};
+}
 
 export default Home;

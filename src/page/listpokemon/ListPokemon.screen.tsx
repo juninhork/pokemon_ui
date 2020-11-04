@@ -1,10 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useLayoutEffect} from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
-import {Container, List} from './ListPokemon.style';
+import {
+  Container,
+  List,
+  FilterTouchable,
+  FilterImage,
+} from './ListPokemon.style';
 
 import {GetListPokemon} from '../../service/PokemonService';
 import PokemonCell from '../../component/pokemoncell/PokemonCell';
 import {Pokemon} from '../../model/Pokemon';
+import IMAGE from '../../assets/image/filter-results-button.png';
 
 const ListPokemon: React.FC<Props> = ({route, navigation}) => {
   const {typeName} = route.params;
@@ -14,6 +20,22 @@ const ListPokemon: React.FC<Props> = ({route, navigation}) => {
   useEffect(() => {
     getListPokemon();
   }, []);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // title: 'List Pokemon',
+      title: 'Filter',
+      headerRight: renderButton,
+    });
+  }, [navigation]);
+
+  const renderButton = () => {
+    return (
+      <FilterTouchable activeOpacity={0.5} onPress={() => {}}>
+        <FilterImage source={IMAGE} />
+      </FilterTouchable>
+    );
+  };
 
   /**
    * Request Service

@@ -15,6 +15,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../page/home/Home.screen';
 import ListPokemon from '../page/listpokemon/ListPokemon.screen';
 import Filter from '../page/filter/Filter.screen';
+import PokemonDetail from '../page/pokemondetail/PokemonDetail.screen';
 
 const Stack = createStackNavigator();
 
@@ -47,7 +48,6 @@ const Routes = () => {
 
         <Stack.Screen
           options={{
-            title: 'Filter',
             headerTintColor: '#ffffff',
             headerStyle: {
               backgroundColor: '#000000',
@@ -55,6 +55,17 @@ const Routes = () => {
           }}
           name="Filter"
           component={Filter}
+        />
+        <Stack.Screen
+          options={{
+            title: 'PokemonDetail',
+            headerTintColor: '#ffffff',
+            headerStyle: {
+              backgroundColor: '#000000',
+            },
+          }}
+          name="PokemonDetail"
+          component={PokemonDetail}
         />
       </Stack.Navigator>
     </NavigationContainer>
