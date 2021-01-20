@@ -4,11 +4,11 @@ import {Container, ContainerElement, TextName} from './TypePokemonCell.style';
 import PropTypes from 'prop-types';
 
 const TypePokemonCell = (props) => {
-  const _detailCharacter = () => {
-    props.onPress(props.name);
-  };
-
   const {name} = props;
+
+  const _detailCharacter = () => {
+    props.onPress(name);
+  };
 
   return (
     <Container>
@@ -39,6 +39,6 @@ TypePokemonCell.propTypes = {
 };
 
 TypePokemonCell.defaultProps = {
-  onPress: undefined,
+  onPress: () => {},
   name: '',
 };

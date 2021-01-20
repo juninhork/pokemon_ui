@@ -15,13 +15,10 @@ const Filter: React.FC<Props> = ({route, navigation}) => {
     console.warn(route.params);
   }, []);
 
+  const _selectedItem = (item) => {};
+
   const _renderItem = ({item}) => {
-    return (
-      <TypePokemonCell
-        name={item}
-        //  onPress={showDetails}
-      />
-    );
+    return <TypePokemonCell name={item} onPress={_selectedItem} />;
   };
   return (
     <>

@@ -6,6 +6,7 @@ export const Container = styled.View`
 `;
 
 export const List = styled.FlatList`
+  margin-top:10;
   padding-left: 20;
   padding-right: 20;
   padding-bottom: 20;
@@ -27,4 +28,11 @@ export const FilterImage = styled.Image`
   width: 100%;
   height: 100%;
   tint-color: #ffffff;
+`;
+
+export const TitleText = styled.Text`
+  font-size:35;
+  color: #ffffff;
+  margin-left:5%;
+  font-weight: bold;
 `;

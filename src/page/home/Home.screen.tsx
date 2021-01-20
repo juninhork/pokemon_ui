@@ -1,3 +1,8 @@
+/**
+ * @author Paulo Braga de Assis Junior
+ * @format
+ */
+
 import React, {useEffect, useState, useLayoutEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {
@@ -6,6 +11,7 @@ import {
   SafeArea,
   FilterTouchable,
   FilterImage,
+  TitleText,
 } from './Home.style';
 import {GetListPokemon} from '../../service/PokemonService';
 import {Pokemon} from '../../model/Pokemon';
@@ -19,7 +25,7 @@ function Home({navigation}) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Home',
+      title: '',
       headerRight: renderButton,
     });
   }, [navigation]);
@@ -80,6 +86,7 @@ function Home({navigation}) {
       <StatusBar barStyle="dark-content" />
       <SafeArea>
         <Container>
+          <TitleText>Pokemon</TitleText>
           <List
             onEndReachedThreshold={0.1}
             data={listPokemon}
